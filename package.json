@@ -1,0 +1,35 @@
+{
+  "name": "stripe-payment-google-login-tutorial",
+  "version": "1.0.0",
+  "description": "A tutorial demonstrating Stripe payment integration with Google OAuth authentication",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "stripe",
+    "google-oauth",
+    "payment",
+    "authentication",
+    "tutorial"
+  ],
+  "author": "Raimon Vibe",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
+    "stripe": "^14.12.0",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

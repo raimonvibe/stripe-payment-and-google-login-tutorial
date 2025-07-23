@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Standard meta tags for proper rendering and mobile responsiveness -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stripe Payment & Google Login Tutorial</title>
+    
+    <!-- Link to custom CSS styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Sign-In JavaScript library (loaded asynchronously) -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <!-- Main container for the entire page content -->
+    <div class="container">
+        <!-- Page header with title and description -->
+        <header>
+            <h1>Stripe Payment & Google Login Tutorial</h1>
+            <p>Learn how to integrate Stripe payments with Google OAuth authentication</p>
+        </header>
+
+        <!-- Main content area -->
+        <main>
+            <!-- Authentication section with Google login button -->
+            <div class="auth-section">
+                <h2>Authentication</h2>
+                <p>Sign in with your Google account to access payment features</p>
+                
+                <div class="login-container">
+                    <!-- Google login button that redirects to server OAuth route -->
+                    <a href="/auth/google" class="google-login-btn">
+                        <!-- Google logo SVG icon -->
+                        <svg width="18" height="18" viewBox="0 0 18 18">
+                            <!-- Google "G" logo paths with official colors -->
+                            <path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"/>
+                            <path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2.04a4.8 4.8 0 0 1-7.18-2.53H1.83v2.07A8 8 0 0 0 8.98 17z"/>
+                            <path fill="#FBBC05" d="M4.5 10.49a4.8 4.8 0 0 1 0-3.07V5.35H1.83a8 8 0 0 0 0 7.28l2.67-2.14z"/>
+                            <path fill="#EA4335" d="M8.98 4.72c1.16 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.35L4.5 7.42a4.77 4.77 0 0 1 4.48-2.7z"/>
+                        </svg>
+                        Sign in with Google
+                    </a>
+                </div>
+            </div>
+
+            <!-- Features section explaining what the tutorial covers -->
+            <div class="features-section">
+                <h2>What You'll Learn</h2>
+                <!-- Grid layout for feature cards -->
+                <div class="features-grid">
+                    <!-- Individual feature cards explaining key concepts -->
+                    <div class="feature-card">
+                        <h3>🔐 Google OAuth</h3>
+                        <p>Secure user authentication using Google's OAuth 2.0 service</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>💳 Stripe Payments</h3>
+                        <p>Process payments securely with Stripe's payment infrastructure</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔒 Session Management</h3>
+                        <p>Maintain user sessions securely across the application</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📱 Responsive Design</h3>
+                        <p>Mobile-friendly interface that works on all devices</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tutorial overview section with detailed list -->
+            <div class="code-section">
+                <h2>Tutorial Overview</h2>
+                <p>This tutorial demonstrates:</p>
+                <!-- List of tutorial topics and learning objectives -->
+                <ul>
+                    <li>Setting up Google OAuth 2.0 authentication</li>
+                    <li>Integrating Stripe payment processing</li>
+                    <li>Securing API endpoints with authentication middleware</li>
+                    <li>Handling payment intents and webhooks</li>
+                    <li>Creating a responsive user interface</li>
+                </ul>
+            </div>
+        </main>
+
+        <!-- Page footer -->
+        <footer>
+            <p>Built with ❤️ for learning purposes</p>
+        </footer>
+    </div>
+
+    <!-- Load custom JavaScript for page functionality -->
+    <script src="script.js"></script>
+</body>
+</html>
