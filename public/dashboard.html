@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Standard meta tags for proper rendering and mobile responsiveness -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Stripe Payment Tutorial</title>
+    
+    <!-- Link to custom CSS styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Stripe.js library for payment processing (loaded from CDN) -->
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Main container for the dashboard content -->
+    <div class="container">
+        <!-- Dashboard header with user information and logout -->
+        <header>
+            <h1>Payment Dashboard</h1>
+            <!-- User information section (populated by JavaScript) -->
+            <div class="user-info">
+                <!-- User photo from Google profile -->
+                <img id="userPhoto" src="" alt="User Photo" class="user-photo">
+                <!-- User name from Google profile -->
+                <span id="userName"></span>
+                <!-- Logout link that redirects to server logout route -->
+                <a href="/auth/logout" class="logout-btn">Logout</a>
+            </div>
+        </header>
+
+        <!-- Main dashboard content -->
+        <main>
+            <!-- Payment processing section -->
+            <div class="payment-section">
+                <h2>Make a Payment</h2>
+                <p>Test the Stripe payment integration with your authenticated account</p>
+
+                <!-- Container for the payment form -->
+                <div class="payment-form-container">
+                    <!-- Payment form (handled by JavaScript) -->
+                    <form id="payment-form">
+                        <!-- Amount input field -->
+                        <div class="form-group">
+                            <label for="amount">Amount (USD)</label>
+                            <!-- Number input with minimum value and step for cents -->
+                            <input type="number" id="amount" min="0.50" step="0.01" value="10.00" required>
+                        </div>
+
+                        <!-- Payment description field -->
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" id="description" value="Test Payment" required>
+                        </div>
+
+                        <!-- Stripe card element container (populated by Stripe.js) -->
+                        <div id="card-element" class="card-element">
+                            <!-- Stripe Elements will create form elements here -->
+                        </div>
+
+                        <!-- Error message display area -->
+                        <div id="card-errors" role="alert" class="error-message"></div>
+
+                        <!-- Submit button with loading state -->
+                        <button type="submit" id="submit-button" class="pay-button">
+                            <span id="button-text">Pay Now</span>
+                            <!-- Loading spinner (hidden by default) -->
+                            <div id="spinner" class="spinner hidden"></div>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Payment success message (hidden by default) -->
+                <div id="payment-result" class="payment-result hidden">
+                    <h3>Payment Successful!</h3>
+                    <p>Thank you for your payment. Your transaction has been processed successfully.</p>
+                </div>
+            </div>
+
+            <!-- Information section with test card numbers -->
+            <div class="info-section">
+                <h2>Test Card Numbers</h2>
+                <p>Use these test card numbers to simulate different payment scenarios:</p>
+                <!-- Grid of test card numbers for different scenarios -->
+                <div class="test-cards">
+                    <!-- Successful payment test card -->
+                    <div class="test-card">
+                        <strong>Successful Payment:</strong><br>
+                        4242 4242 4242 4242
+                    </div>
+                    <!-- Declined payment test card -->
+                    <div class="test-card">
+                        <strong>Declined Payment:</strong><br>
+                        4000 0000 0000 0002
+                    </div>
+                    <!-- Insufficient funds test card -->
+                    <div class="test-card">
+                        <strong>Insufficient Funds:</strong><br>
+                        4000 0000 0000 9995
+                    </div>
+                </div>
+                <!-- Instructions for test card usage -->
+                <p><small>Use any future expiry date and any 3-digit CVC</small></p>
+            </div>
+        </main>
+
+        <!-- Dashboard footer -->
+        <footer>
+            <p>Stripe Payment Integration Tutorial</p>
+        </footer>
+    </div>
+
+    <!-- Load dashboard-specific JavaScript -->
+    <script src="dashboard.js"></script>
+</body>
+</html>
