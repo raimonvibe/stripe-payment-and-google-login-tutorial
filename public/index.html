@@ -1,96 +1,442 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Standard meta tags for proper rendering and mobile responsiveness -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stripe Payment & Google Login Tutorial</title>
-    
-    <!-- Link to custom CSS styles -->
+    <title>Complete Guide: Google OAuth + Stripe Payments</title>
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Google Sign-In JavaScript library (loaded asynchronously) -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </head>
 <body>
-    <!-- Main container for the entire page content -->
     <div class="container">
-        <!-- Page header with title and description -->
         <header>
-            <h1>Stripe Payment & Google Login Tutorial</h1>
-            <p>Learn how to integrate Stripe payments with Google OAuth authentication</p>
+            <h1>🚀 Complete Tutorial: Google OAuth + Stripe Payments</h1>
+            <p>Learn to build secure authentication and payment processing from scratch</p>
+            <div class="tutorial-nav">
+                <a href="#overview" class="nav-link">Overview</a>
+                <a href="#setup" class="nav-link">Setup</a>
+                <a href="#auth" class="nav-link">Authentication</a>
+                <a href="#payments" class="nav-link">Payments</a>
+                <a href="#demo" class="nav-link">Live Demo</a>
+            </div>
         </header>
 
-        <!-- Main content area -->
         <main>
-            <!-- Authentication section with Google login button -->
-            <div class="auth-section">
-                <h2>Authentication</h2>
-                <p>Sign in with your Google account to access payment features</p>
+            <!-- Tutorial Overview -->
+            <section id="overview" class="tutorial-section">
+                <h2>📚 What You'll Build</h2>
+                <p>By the end of this tutorial, you'll have a complete web application with:</p>
                 
-                <div class="login-container">
-                    <!-- Google login button that redirects to server OAuth route -->
-                    <a href="/auth/google" class="google-login-btn">
-                        <!-- Google logo SVG icon -->
-                        <svg width="18" height="18" viewBox="0 0 18 18">
-                            <!-- Google "G" logo paths with official colors -->
-                            <path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"/>
-                            <path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2.04a4.8 4.8 0 0 1-7.18-2.53H1.83v2.07A8 8 0 0 0 8.98 17z"/>
-                            <path fill="#FBBC05" d="M4.5 10.49a4.8 4.8 0 0 1 0-3.07V5.35H1.83a8 8 0 0 0 0 7.28l2.67-2.14z"/>
-                            <path fill="#EA4335" d="M8.98 4.72c1.16 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.35L4.5 7.42a4.77 4.77 0 0 1 4.48-2.7z"/>
-                        </svg>
-                        Sign in with Google
-                    </a>
-                </div>
-            </div>
-
-            <!-- Features section explaining what the tutorial covers -->
-            <div class="features-section">
-                <h2>What You'll Learn</h2>
-                <!-- Grid layout for feature cards -->
                 <div class="features-grid">
-                    <!-- Individual feature cards explaining key concepts -->
                     <div class="feature-card">
-                        <h3>🔐 Google OAuth</h3>
-                        <p>Secure user authentication using Google's OAuth 2.0 service</p>
+                        <h3>🔐 Google OAuth 2.0</h3>
+                        <p>Secure user authentication using Google's OAuth service</p>
+                        <ul class="feature-list">
+                            <li>OAuth flow implementation</li>
+                            <li>User session management</li>
+                            <li>Profile data access</li>
+                        </ul>
                     </div>
                     <div class="feature-card">
-                        <h3>💳 Stripe Payments</h3>
-                        <p>Process payments securely with Stripe's payment infrastructure</p>
+                        <h3>💳 Stripe Integration</h3>
+                        <p>Professional payment processing with Stripe</p>
+                        <ul class="feature-list">
+                            <li>Payment intents API</li>
+                            <li>Secure card collection</li>
+                            <li>Webhook handling</li>
+                        </ul>
                     </div>
                     <div class="feature-card">
-                        <h3>🔒 Session Management</h3>
-                        <p>Maintain user sessions securely across the application</p>
+                        <h3>🛡️ Security Best Practices</h3>
+                        <p>Industry-standard security implementation</p>
+                        <ul class="feature-list">
+                            <li>Server-side validation</li>
+                            <li>Session protection</li>
+                            <li>API key security</li>
+                        </ul>
                     </div>
                     <div class="feature-card">
-                        <h3>📱 Responsive Design</h3>
-                        <p>Mobile-friendly interface that works on all devices</p>
+                        <h3>🎨 Modern UI/UX</h3>
+                        <p>Responsive design with dark mode</p>
+                        <ul class="feature-list">
+                            <li>Mobile-first design</li>
+                            <li>Theme switching</li>
+                            <li>Smooth animations</li>
+                        </ul>
                     </div>
                 </div>
-            </div>
 
-            <!-- Tutorial overview section with detailed list -->
-            <div class="code-section">
-                <h2>Tutorial Overview</h2>
-                <p>This tutorial demonstrates:</p>
-                <!-- List of tutorial topics and learning objectives -->
-                <ul>
-                    <li>Setting up Google OAuth 2.0 authentication</li>
-                    <li>Integrating Stripe payment processing</li>
-                    <li>Securing API endpoints with authentication middleware</li>
-                    <li>Handling payment intents and webhooks</li>
-                    <li>Creating a responsive user interface</li>
-                </ul>
-            </div>
+                <div class="tech-stack">
+                    <h3>🛠️ Technology Stack</h3>
+                    <div class="tech-grid">
+                        <span class="tech-badge">Node.js</span>
+                        <span class="tech-badge">Express.js</span>
+                        <span class="tech-badge">Passport.js</span>
+                        <span class="tech-badge">Stripe API</span>
+                        <span class="tech-badge">Google OAuth</span>
+                        <span class="tech-badge">HTML5/CSS3</span>
+                        <span class="tech-badge">JavaScript ES6+</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Prerequisites and Setup -->
+            <section id="setup" class="tutorial-section">
+                <h2>⚙️ Prerequisites & Setup</h2>
+                
+                <div class="setup-grid">
+                    <div class="setup-card">
+                        <h3>📋 Prerequisites</h3>
+                        <ul>
+                            <li>Node.js 16+ installed</li>
+                            <li>Basic JavaScript knowledge</li>
+                            <li>Understanding of HTTP/REST APIs</li>
+                            <li>Familiarity with Express.js (helpful)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="setup-card">
+                        <h3>🔑 Required Accounts</h3>
+                        <ul>
+                            <li><a href="https://dashboard.stripe.com/register" target="_blank">Stripe Account</a> (free)</li>
+                            <li><a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a> (free)</li>
+                            <li>GitHub account (for deployment)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <h3>🚀 Quick Start</h3>
+                    <pre><code class="language-bash"># Clone the repository
+git clone https://github.com/raimonvibe/stripe-payment-and-google-login-tutorial.git
+cd stripe-payment-and-google-login-tutorial
+
+# Install dependencies
+npm install
+
+# Copy environment template
+cp .env.example .env
+
+# Start development server
+npm start</code></pre>
+                </div>
+            </section>
+
+            <!-- Authentication Tutorial -->
+            <section id="auth" class="tutorial-section">
+                <h2>🔐 Google OAuth Implementation</h2>
+                
+                <div class="tutorial-step">
+                    <h3>Step 1: Google Cloud Console Setup</h3>
+                    <p>First, we need to configure Google OAuth credentials:</p>
+                    
+                    <ol class="step-list">
+                        <li>Go to <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+                        <li>Create a new project or select existing one</li>
+                        <li>Enable the Google+ API</li>
+                        <li>Create OAuth 2.0 credentials</li>
+                        <li>Add authorized redirect URI: <code>http://localhost:3000/auth/google/callback</code></li>
+                    </ol>
+                </div>
+
+                <div class="tutorial-step">
+                    <h3>Step 2: Server-Side OAuth Setup</h3>
+                    <p>Here's how we implement Google OAuth with Passport.js:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// server/server.js - OAuth Configuration
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+// Configure Google OAuth strategy
+passport.use(new GoogleStrategy({
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: "/auth/google/callback"
+}, (accessToken, refreshToken, profile, done) => {
+  // Extract user information from Google profile
+  const user = {
+    id: profile.id,
+    name: profile.displayName,
+    email: profile.emails[0].value,
+    photo: profile.photos[0].value
+  };
+  return done(null, user);
+}));</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <h3>Step 3: Authentication Routes</h3>
+                    <p>Set up the OAuth flow with these Express routes:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// Initiate Google OAuth
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+// Handle OAuth callback
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  (req, res) => {
+    res.redirect('/dashboard'); // Redirect to protected area
+  }
+);
+
+// Logout route
+app.get('/auth/logout', (req, res) => {
+  req.logout((err) => {
+    if (err) return res.status(500).json({ error: 'Logout failed' });
+    res.redirect('/');
+  });
+});</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <h3>Step 4: Session Management</h3>
+                    <p>Secure session handling with Express Session:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// Session configuration
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false } // Set to true in production with HTTPS
+}));
+
+// Serialize user for session storage
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stripe Payments Tutorial -->
+            <section id="payments" class="tutorial-section">
+                <h2>💳 Stripe Payment Integration</h2>
+                
+                <div class="tutorial-step">
+                    <h3>Step 1: Stripe Account Setup</h3>
+                    <p>Configure your Stripe account for payment processing:</p>
+                    
+                    <ol class="step-list">
+                        <li>Create a <a href="https://dashboard.stripe.com/register" target="_blank">Stripe account</a></li>
+                        <li>Get your API keys from the dashboard</li>
+                        <li>Use test keys for development</li>
+                        <li>Add keys to your <code>.env</code> file</li>
+                    </ol>
+                </div>
+
+                <div class="tutorial-step">
+                    <h3>Step 2: Payment Intent Creation</h3>
+                    <p>Server-side payment intent creation for security:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// Create payment intent endpoint
+app.post('/api/create-payment-intent', ensureAuthenticated, async (req, res) => {
+  try {
+    const { amount, currency = 'usd' } = req.body;
+
+    // Validate amount (minimum $0.50)
+    if (!amount || amount < 50) {
+      return res.status(400).json({ error: 'Amount must be at least $0.50' });
+    }
+
+    // Create payment intent with user metadata
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amount, // Amount in cents
+      currency: currency,
+      metadata: {
+        userId: req.user.id,
+        userEmail: req.user.email
+      }
+    });
+
+    res.json({
+      clientSecret: paymentIntent.client_secret
+    });
+  } catch (error) {
+    console.error('Error creating payment intent:', error);
+    res.status(500).json({ error: 'Failed to create payment intent' });
+  }
+});</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <h3>Step 3: Client-Side Payment Form</h3>
+                    <p>Secure card collection with Stripe Elements:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// Initialize Stripe Elements
+const stripe = Stripe('your_publishable_key');
+const elements = stripe.elements();
+
+// Create card element
+const card = elements.create('card', {
+  style: {
+    base: {
+      fontSize: '16px',
+      color: '#424770',
+      '::placeholder': {
+        color: '#aab7c4',
+      },
+    },
+  },
+});
+
+// Mount card element to DOM
+card.mount('#card-element');
+
+// Handle form submission
+document.getElementById('payment-form').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  
+  const { clientSecret } = await createPaymentIntent(amount);
+  
+  const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+    payment_method: {
+      card: card,
+    }
+  });
+  
+  if (error) {
+    console.error('Payment failed:', error);
+  } else {
+    console.log('Payment succeeded:', paymentIntent);
+  }
+});</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <h3>Step 4: Webhook Handling</h3>
+                    <p>Process payment events securely with webhooks:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// Webhook endpoint for Stripe events
+app.post('/api/webhook', express.raw({ type: 'application/json' }), (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  let event;
+
+  try {
+    // Verify webhook signature
+    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+  } catch (err) {
+    console.log(`Webhook signature verification failed.`, err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  // Handle the event
+  switch (event.type) {
+    case 'payment_intent.succeeded':
+      const paymentIntent = event.data.object;
+      console.log('Payment succeeded:', paymentIntent.id);
+      // Update your database, send confirmation email, etc.
+      break;
+    default:
+      console.log(`Unhandled event type ${event.type}`);
+  }
+
+  res.json({ received: true });
+});</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Live Demo Section -->
+            <section id="demo" class="tutorial-section">
+                <h2>🎮 Try the Live Demo</h2>
+                <p>Experience the complete implementation in action:</p>
+                
+                <div class="demo-section">
+                    <div class="demo-card">
+                        <h3>🔐 Authentication Demo</h3>
+                        <p>Test the Google OAuth flow (requires setup):</p>
+                        <a href="/auth/google" class="demo-btn google-login-btn">
+                            <svg width="18" height="18" viewBox="0 0 18 18">
+                                <path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"/>
+                                <path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2.04a4.8 4.8 0 0 1-7.18-2.53H1.83v2.07A8 8 0 0 0 8.98 17z"/>
+                                <path fill="#FBBC05" d="M4.5 10.49a4.8 4.8 0 0 1 0-3.07V5.35H1.83a8 8 0 0 0 0 7.28l2.67-2.14z"/>
+                                <path fill="#EA4335" d="M8.98 4.72c1.16 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.35L4.5 7.42a4.77 4.77 0 0 1 4.48-2.7z"/>
+                            </svg>
+                            Sign in with Google
+                        </a>
+                    </div>
+                    
+                    <div class="demo-card">
+                        <h3>💳 Test Card Numbers</h3>
+                        <p>Use these cards to test payments:</p>
+                        <div class="test-cards">
+                            <div class="test-card">
+                                <strong>Success:</strong><br>
+                                <code>4242 4242 4242 4242</code>
+                            </div>
+                            <div class="test-card">
+                                <strong>Declined:</strong><br>
+                                <code>4000 0000 0000 0002</code>
+                            </div>
+                            <div class="test-card">
+                                <strong>Insufficient Funds:</strong><br>
+                                <code>4000 0000 0000 9995</code>
+                            </div>
+                        </div>
+                        <p><small>Use any future expiry date and any 3-digit CVC</small></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resources Section -->
+            <section class="tutorial-section">
+                <h2>📚 Additional Resources</h2>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h3>📖 Documentation</h3>
+                        <ul>
+                            <li><a href="https://stripe.com/docs" target="_blank">Stripe API Docs</a></li>
+                            <li><a href="https://developers.google.com/identity/protocols/oauth2" target="_blank">Google OAuth Guide</a></li>
+                            <li><a href="http://www.passportjs.org/docs/" target="_blank">Passport.js Docs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <h3>🛠️ Tools & Testing</h3>
+                        <ul>
+                            <li><a href="https://dashboard.stripe.com/test/logs" target="_blank">Stripe Test Logs</a></li>
+                            <li><a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+                            <li><a href="https://ngrok.com/" target="_blank">ngrok (for webhooks)</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <h3>🚀 Next Steps</h3>
+                        <ul>
+                            <li>Add user database storage</li>
+                            <li>Implement subscription billing</li>
+                            <li>Add email notifications</li>
+                            <li>Deploy to production</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
         </main>
 
-        <!-- Page footer -->
         <footer>
-            <p>Built with ❤️ for learning purposes</p>
+            <p>Built with ❤️ for learning • <a href="https://github.com/raimonvibe/stripe-payment-and-google-login-tutorial" target="_blank">View on GitHub</a></p>
         </footer>
     </div>
 
-    <!-- Load custom JavaScript for page functionality -->
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Stripe Payment & Google Login Tutorial loaded');
+    console.log('Google OAuth + Stripe Tutorial loaded');
     
     initializeTheme();
+    initializeNavigation();
+    initializeSmoothScrolling();
     
     const loginBtn = document.querySelector('.google-login-btn');
     
@@ -10,8 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Google login initiated');
         });
     }
-    
-    checkAuthStatus();
 });
 
 /**
@@ -63,21 +63,89 @@ function setTheme(theme) {
 }
 
 /**
- * Check if the user is already authenticated
- * If authenticated, redirect to dashboard
- * If not authenticated, stay on the login page
+ * Initialize smooth scrolling for navigation links
+ */
+function initializeSmoothScrolling() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            }
+        });
+    });
+}
+
+/**
+ * Initialize navigation highlighting based on scroll position
+ */
+function initializeNavigation() {
+    const sections = document.querySelectorAll('.tutorial-section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    function updateActiveNav() {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (window.pageYOffset >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+    
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav(); // Call once on load
+}
+
+/**
+ * Check if the user is already authenticated (for demo purposes)
+ * This is optional and doesn't block tutorial content
  */
 async function checkAuthStatus() {
     try {
-        // Make API call to check if user is authenticated
         const response = await fetch('/api/user');
         if (response.ok) {
-            // User is authenticated, redirect to dashboard
-            window.location.href = '/dashboard';
+            const user = await response.json();
+            console.log('User is authenticated:', user.name);
+            
+            const demoSection = document.querySelector('#demo .demo-card');
+            if (demoSection) {
+                const authStatus = document.createElement('div');
+                authStatus.className = 'auth-status';
+                authStatus.innerHTML = `
+                    <p style="color: #4CAF50; font-weight: bold;">
+                        ✓ Authenticated as ${user.name}
+                    </p>
+                    <a href="/dashboard" style="color: var(--gradient-primary);">
+                        Go to Payment Dashboard →
+                    </a>
+                `;
+                demoSection.appendChild(authStatus);
+            }
         }
-        // If response is not ok (401), user is not authenticated - stay on login page
     } catch (error) {
-        // Network error or user not authenticated
-        console.log('User not authenticated');
+        console.log('User not authenticated - tutorial content still accessible');
     }
 }

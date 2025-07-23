@@ -11,6 +11,8 @@
     --shadow-color: rgba(0, 0, 0, 0.1); /* Light shadow */
     --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Blue-purple gradient */
     --button-hover-shadow: rgba(102, 126, 234, 0.4); /* Blue button shadow */
+    --code-bg: #f8f8f8; /* Light code background */
+    --code-border: #e1e1e1; /* Code border */
 }
 
 /* Dark mode colors */
@@ -25,6 +27,8 @@
     --shadow-color: rgba(0, 0, 0, 0.3); /* Darker shadow */
     --gradient-primary: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%); /* Orange gradient */
     --button-hover-shadow: rgba(255, 107, 53, 0.4); /* Orange button shadow */
+    --code-bg: #2a2a2a; /* Dark code background */
+    --code-border: #444444; /* Dark code border */
 }
 
 /* Global reset and base styles */
@@ -124,6 +128,78 @@ header p {
     background: rgba(255, 255, 255, 0.3);
 }
 
+/* Tutorial navigation */
+.tutorial-nav {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.nav-link {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Tutorial sections */
+.tutorial-section {
+    background: var(--bg-secondary);
+    padding: 40px;
+    margin-bottom: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tutorial-section h2 {
+    color: var(--text-primary);
+    margin-bottom: 25px;
+    font-size: 2rem;
+    border-bottom: 3px solid var(--gradient-primary);
+    padding-bottom: 10px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Tutorial steps */
+.tutorial-step {
+    margin-bottom: 40px;
+    padding: 25px;
+    background: var(--bg-accent);
+    border-radius: 10px;
+    border-left: 4px solid var(--gradient-primary);
+}
+
+.tutorial-step h3 {
+    color: var(--text-primary);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.step-list {
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+.step-list li {
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+}
+
 /* Section styling with theme variables */
 .auth-section, .payment-section, .features-section, .code-section, .info-section {
     background: var(--bg-secondary); /* Use theme card background */
@@ -170,11 +246,226 @@ header p {
     border-color: var(--text-secondary); /* Darker border on hover */
 }
 
+/* Code blocks */
+.code-block {
+    margin: 25px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.code-block h3 {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 15px 20px;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.code-block pre {
+    background: var(--code-bg) !important;
+    border: 1px solid var(--code-border);
+    margin: 0;
+    padding: 20px;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.code-block code {
+    background: transparent !important;
+    color: var(--text-primary);
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+/* Technology stack */
+.tech-stack {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.tech-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.tech-badge {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Setup grids */
+.setup-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.setup-card {
+    background: var(--bg-accent);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.setup-card h3 {
+    color: var(--text-primary);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.setup-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.setup-card li {
+    padding: 8px 0;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.setup-card li:last-child {
+    border-bottom: none;
+}
+
+.setup-card a {
+    color: var(--gradient-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.setup-card a:hover {
+    text-decoration: underline;
+}
+
+/* Feature lists */
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.feature-list li {
+    padding: 5px 0;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 20px;
+}
+
+.feature-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
     margin-top: 30px;
+}
+
+/* Demo section */
+.demo-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.demo-card {
+    background: var(--bg-accent);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.demo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+.demo-card h3 {
+    color: var(--text-primary);
+    margin-bottom: 15px;
+}
+
+.demo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 30px;
+    background: var(--gradient-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+.demo-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--button-hover-shadow);
+}
+
+/* Resources grid */
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.resource-card {
+    background: var(--bg-accent);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.resource-card h3 {
+    color: var(--text-primary);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.resource-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.resource-card li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.resource-card li:last-child {
+    border-bottom: none;
+}
+
+.resource-card a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.resource-card a:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
 }
 
 /* Feature card styling with theme variables */
@@ -341,30 +632,93 @@ footer {
     transition: color 0.3s ease, border-color 0.3s ease; /* Smooth theme transition */
 }
 
+/* Active navigation link */
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Authentication status in demo */
+.auth-status {
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+/* Responsive design */
 @media (max-width: 768px) {
     .container {
-        padding: 10px;
+        padding: 15px;
     }
     
     header {
-        padding: 20px;
+        padding: 30px 20px;
     }
     
     header h1 {
         font-size: 2rem;
     }
     
-    .user-info {
-        position: static;
-        justify-content: center;
-        margin-top: 20px;
+    .tutorial-nav {
+        gap: 10px;
+    }
+    
+    .nav-link {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .tutorial-section {
+        padding: 25px;
+    }
+    
+    .tutorial-section h2 {
+        font-size: 1.6rem;
+    }
+    
+    .tutorial-step {
+        padding: 20px;
     }
     
     .features-grid {
         grid-template-columns: 1fr;
     }
     
+    .setup-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .demo-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .resources-grid {
+        grid-template-columns: 1fr;
+    }
+    
     .test-cards {
         grid-template-columns: 1fr;
+    }
+    
+    .tech-grid {
+        gap: 8px;
+    }
+    
+    .tech-badge {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+    
+    .code-block pre {
+        font-size: 12px;
+        padding: 15px;
+    }
+    
+    .user-info {
+        position: static;
+        justify-content: center;
+        margin-top: 20px;
     }
 }
