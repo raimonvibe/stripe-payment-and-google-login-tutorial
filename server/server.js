@@ -10,7 +10,7 @@ require('dotenv').config(); // Load environment variables from .env file
 const app = express();
 const PORT = process.env.PORT || 3000; // Use environment port or default to 3000
 
-const stripeInstance = stripe(process.env.STRIPE_SECRET_KEY);
+const stripeInstance = process.env.STRIPE_SECRET_KEY ? stripe(process.env.STRIPE_SECRET_KEY) : null;
 
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Parse JSON request bodies
@@ -27,19 +27,21 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session()); // Enable persistent login sessions
 
-passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID, // Google OAuth client ID
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET, // Google OAuth client secret
-  callbackURL: "/auth/google/callback" // Callback URL after Google authentication
-}, (accessToken, refreshToken, profile, done) => {
-  const user = {
-    id: profile.id,
-    name: profile.displayName,
-    email: profile.emails[0].value,
-    photo: profile.photos[0].value
-  };
-  return done(null, user); // Pass user to Passport
-}));
+if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+  passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID, // Google OAuth client ID
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET, // Google OAuth client secret
+    callbackURL: "/auth/google/callback" // Callback URL after Google authentication
+  }, (accessToken, refreshToken, profile, done) => {
+    const user = {
+      id: profile.id,
+      name: profile.displayName,
+      email: profile.emails[0].value,
+      photo: profile.photos[0].value
+    };
+    return done(null, user); // Pass user to Passport
+  }));
+}
 
 passport.serializeUser((user, done) => {
   done(null, user); // Store entire user object in session
@@ -56,37 +58,64 @@ function ensureAuthenticated(req, res, next) {
   res.status(401).json({ error: 'Not authenticated' }); // Return error if not authenticated
 }
 
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] }) // Request profile and email access
-);
+if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+  app.get('/auth/google',
+    passport.authenticate('google', { scope: ['profile', 'email'] }) // Request profile and email access
+  );
 
-app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }), // Authenticate with Google, redirect to home on failure
-  (req, res) => {
-    res.redirect('/dashboard'); // Redirect to dashboard on successful authentication
-  }
-);
-
-app.get('/auth/logout', (req, res) => {
-  req.logout((err) => {
-    if (err) {
-      return res.status(500).json({ error: 'Logout failed' });
+  app.get('/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/' }), // Authenticate with Google, redirect to home on failure
+    (req, res) => {
+      res.redirect('/dashboard'); // Redirect to dashboard on successful authentication
     }
-    res.redirect('/'); // Redirect to home page after logout
+  );
+
+  app.get('/auth/logout', (req, res) => {
+    req.logout((err) => {
+      if (err) {
+        return res.status(500).json({ error: 'Logout failed' });
+      }
+      res.redirect('/'); // Redirect to home page after logout
+    });
   });
-});
+} else {
+  app.get('/auth/google', (req, res) => {
+    res.status(501).json({ 
+      error: 'Google OAuth not configured', 
+      message: 'Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables to enable authentication. See the tutorial for setup instructions.' 
+    });
+  });
+
+  app.get('/auth/logout', (req, res) => {
+    res.redirect('/');
+  });
+}
 
 app.get('/api/user', ensureAuthenticated, (req, res) => {
   res.json(req.user); // Return user object as JSON
 });
 
 app.get('/api/config', (req, res) => {
+  if (!process.env.STRIPE_PUBLISHABLE_KEY) {
+    return res.status(501).json({ 
+      error: 'Stripe not configured', 
+      message: 'Please set STRIPE_PUBLISHABLE_KEY environment variable to enable payments. See the tutorial for setup instructions.' 
+    });
+  }
+  
   res.json({
     publishableKey: process.env.STRIPE_PUBLISHABLE_KEY // Send publishable key to frontend
   });
 });
 
 app.post('/api/create-payment-intent', ensureAuthenticated, async (req, res) => {
+  if (!stripeInstance) {
+    return res.status(501).json({ 
+      error: 'Stripe not configured', 
+      message: 'Please set STRIPE_SECRET_KEY environment variable to enable payments. See the tutorial for setup instructions.' 
+    });
+  }
+
   try {
     const { amount, currency = 'usd' } = req.body; // Extract amount and currency from request
 
@@ -144,5 +173,28 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Tutorial Server running on http://localhost:${PORT}`);
+  console.log('');
+  console.log('📚 TUTORIAL MODE:');
+  console.log('   • Tutorial content is accessible without authentication');
+  console.log('   • View comprehensive code examples and explanations');
+  console.log('   • Learn Google OAuth and Stripe integration step-by-step');
+  console.log('');
+  
+  if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+    console.log('⚠️  Google OAuth: DISABLED (credentials not configured)');
+    console.log('   To enable: Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in .env');
+  } else {
+    console.log('✅ Google OAuth: ENABLED');
+  }
+  
+  if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_PUBLISHABLE_KEY) {
+    console.log('⚠️  Stripe Payments: DISABLED (credentials not configured)');
+    console.log('   To enable: Set STRIPE_SECRET_KEY and STRIPE_PUBLISHABLE_KEY in .env');
+  } else {
+    console.log('✅ Stripe Payments: ENABLED');
+  }
+  
+  console.log('');
+  console.log('🎓 Ready to learn! Open your browser and start the tutorial.');
 });
