@@ -268,14 +268,18 @@ header p {
     margin: 0;
     padding: 20px;
     overflow-x: auto;
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 16px;
+    line-height: 1.6;
+    font-style: normal;
+    font-weight: normal;
 }
 
 .code-block code {
     background: transparent !important;
     color: var(--text-primary);
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-style: normal;
+    font-weight: normal;
 }
 
 /* Technology stack */
@@ -608,7 +612,8 @@ header p {
     background: var(--bg-accent); /* Use theme accent background */
     border-radius: 6px;
     border: 1px solid var(--border-color); /* Use theme border */
-    font-family: 'Courier New', monospace;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 15px;
     color: var(--text-primary); /* Use theme text color */
     transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
@@ -620,6 +625,19 @@ header p {
 
 .code-section li {
     margin-bottom: 8px;
+}
+
+/* Inline code styling */
+code:not(.code-block code) {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    color: var(--text-primary);
+    font-style: normal;
+    font-weight: normal;
 }
 
 /* Footer styling with theme variables */
@@ -702,6 +720,14 @@ footer {
         grid-template-columns: 1fr;
     }
     
+    .test-card {
+        font-size: 14px;
+    }
+    
+    code:not(.code-block code) {
+        font-size: 13px;
+    }
+    
     .tech-grid {
         gap: 8px;
     }
@@ -712,7 +738,7 @@ footer {
     }
     
     .code-block pre {
-        font-size: 12px;
+        font-size: 14px;
         padding: 15px;
     }
     
