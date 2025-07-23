@@ -814,3 +814,130 @@ footer {
         margin-top: 20px;
     }
 }
+
+/* Footer social media icons styling */
+.footer-raimon {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 40px 0;
+    margin-top: 40px;
+}
+
+.footer-raimon-content {
+    text-align: center;
+}
+
+.footer-raimon-title {
+    color: var(--text-primary);
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.social-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Individual social media platform colors */
+.social-twitter {
+    background: #1DA1F2;
+}
+
+.social-twitter:hover {
+    background: #0d8bd9;
+}
+
+.social-youtube {
+    background: #FF0000;
+}
+
+.social-youtube:hover {
+    background: #cc0000;
+}
+
+.social-tiktok {
+    background: #000000;
+}
+
+.social-tiktok:hover {
+    background: #333333;
+}
+
+.social-instagram {
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+}
+
+.social-instagram:hover {
+    background: linear-gradient(45deg, #d17c2a 0%,#c55a33 25%,#b91e3a 50%,#a91a5d 75%,#99157f 100%);
+}
+
+.social-medium {
+    background: #00AB6C;
+}
+
+.social-medium:hover {
+    background: #008a56;
+}
+
+.social-github {
+    background: #333333;
+}
+
+.social-github:hover {
+    background: #555555;
+}
+
+.social-linkedin {
+    background: #0077B5;
+}
+
+.social-linkedin:hover {
+    background: #005885;
+}
+
+.social-facebook {
+    background: #1877F2;
+}
+
+.social-facebook:hover {
+    background: #0d5dbf;
+}
+
+.footer-copyright {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.footer-copyright a {
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.footer-copyright a:hover {
+    text-decoration: underline;
+}
